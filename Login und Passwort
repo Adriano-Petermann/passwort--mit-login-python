@@ -1,0 +1,45 @@
+#Passwort mit Login
+print("Keine Großbuchstaben erlaubt!")      #Anforderungen fürs Passwort
+print("Passwort mind. 6 Zeichen lang!")
+print("Keine Sonderzeichen erlaubt!")
+print("------------------------------------")       #Trennlinie für bessere Übersicht
+Gbuchstabe = False          #Variable: merkt sich ob ein Großbuchstabe gefunden wurde
+passwort = input("Gib ein Passwort ein: ")          #Benutzer gibt Passwort ein
+
+for buchstabe in passwort:      #Schleife geht jeden Buchstaben im Passwort durch
+    if buchstabe.isupper():     #prüft ob der Buchstabe groß ist
+        Gbuchstabe = True       #wenn Großbuchstabe gefunden wurde dann Variable auf True
+
+if Gbuchstabe:
+    print("Keine Großbuchstaben erlaubt!")      #wenn Großbuchstabe behinhaltet ist im Passwort dann Fehlermeldung
+
+elif len(passwort) < 6:     #prüft ob passwort kleiner als 6 ist wenn ja Fehlermeldung
+    print("Passwort zu kurz!")
+
+elif "!" in passwort or "?" in passwort or "." in passwort or "," in passwort or "#" in passwort or "$" in passwort:
+    print("Keine Sonderzeichen erlaubt!")   #prüft den Inhalt auf Sonderzeichen
+
+elif "0" in passwort or "1" in passwort or "2" in passwort or "3" in passwort or "4" in passwort or "5" in passwort or "6" in passwort or "7" in passwort or "8" in passwort or "9" in passwort:
+    print("Gutes Passwort!")    #Prüftenthält das Passwort eine Zahl wenn ja "Gutes Passwort"
+
+    file = open("passwort.txt", "w")    #öffnet eine datei zum schreiben
+    file.write(passwort)    #speichert das "passwort"
+    file.close()    #Datei wird geschlossen
+
+    print("Passwort wurde gespeichert!")
+    print() #leere Zeile
+
+    # Login
+    eingabe = input("Gib dein Passwort zum Einloggen ein: ")    #Benutzer gibt Passwort erneut ein
+
+    file = open("passwort.txt", "r")    #öffnet eine datei zum lesen
+    gespeichert = file.read()   #gespeichertes "passwort" wird gelesen
+    file.close()
+
+    if eingabe == gespeichert:  #wenn das passwort übereinstimmt dann erfolgreicher Login
+        print("Login erfolgreich!")
+    else:
+        print("Falsches Passwort!") #ansonsten Fehlermeldung
+
+else:
+    print("Passwort sollte eine Zahl enthalten!")   #Fehlermeldung wenn keine Zahl enthalten
